@@ -42,15 +42,41 @@ export default function App() {
     
 
     return (
-        <div>
-            <h1>Update Category</h1>
-            <select onChange={(e) => setIndex(e.target.value)}>
-                {categories.map((category) => (
-                    <option key={category.id} value={category.id}>{category.name}</option>
-                ))}
-            </select><br/><br/>
-            <input onChange={(e) => setNewName(e.target.value)} value={newName} placeholder="Enter new name for category"/><br/><br/>
-            <button onClick={updateCategory}>Update</button>
+        <div className="container d-flex justify-content-center align-items-center vh-100">
+            <div className="card mt-5 p-5 text-white">
+                <h1 className="mb-4">Update Category</h1>
+                
+                <div className="form-group">
+                    <label htmlFor="category-select" className="form-label">Select category</label>
+                    <select 
+                        id="category-select" 
+                        className="form-select bg-dark text-white" 
+                        onChange={(e) => setIndex(e.target.value)}
+                    >
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+        
+                <div className="form-group mt-3">
+                    <label htmlFor="new-name" className="form-label">New name</label>
+                    <input 
+                        id="new-name"
+                        className="form-control bg-dark text-white"
+                        onChange={(e) => setNewName(e.target.value)} 
+                        value={newName} 
+                        placeholder="Enter new name for category"
+                    />
+                </div>
+        
+                <button className="btn btn-primary mt-3" onClick={updateCategory}>
+                    Update
+                </button>
+            </div>
         </div>
     );
+    
 }

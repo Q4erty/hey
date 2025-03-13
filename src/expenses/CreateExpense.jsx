@@ -22,12 +22,12 @@ export default function CreateExpenses() {
             const response = await fetch(`http://localhost:3001/expenses`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(
-                    { 
-                        categoryId: categoryId,
-                        amount: expenseAmount,
-                        date: expenseDate,
-                        comment: expenseDesription }),
+                body: JSON.stringify({
+                    categoryId: categoryId,
+                    amount: expenseAmount,
+                    date: expenseDate,
+                    comment: expenseDesription,
+                }),
             });
 
             if (response.ok) {
@@ -38,24 +38,61 @@ export default function CreateExpenses() {
         } catch (error) {
             console.error("Error creating expense:", error);
         }
-    }
+    };
 
     useEffect(() => {
-        if(categories.length > 0) setCategoryId(categories[0].id);
+        if (categories.length > 0) setCategoryId(categories[0].id);
     }, [categories]);
 
     return (
-        <div>
-            <h1>Create Expense</h1>
-            <input onChange={(e) => setExpenseDescription(e.target.value)} placeholder="Enter description of expense" required /><br /><br />
-            <input type="number" onChange={(e) => setExpenseAmount(e.target.value)} placeholder="Enter summ of expense" required /><br /><br />
-            <input type="date" onChange={(e) => setExpenseDate(e.target.value)} required /><br /><br />
-            <select onChange={(e) => setCategoryId(e.target.value)}>
-                {categories.map((category) => (
-                    <option key={category.id} value={category.id}>{category.name}</option>
-                ))}
-            </select><br /><br />
-            <button onClick={createExpense}>Create</button>
+        <div className="d-flex justify-content-center align-items-center vh-100 text-white">
+            <div className="container bg-dark p-4 rounded">
+                <h1 className="text-center">Create Expense</h1>
+                <div className="mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        onChange={(e) => setExpenseDescription(e.target.value)}
+                        placeholder="Enter description of expense"
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <input
+                        type="number"
+                        className="form-control"
+                        onChange={(e) => setExpenseAmount(e.target.value)}
+                        placeholder="Enter summ of expense"
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <input
+                        type="date"
+                        className="form-control"
+                        onChange={(e) => setExpenseDate(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <select
+                        className="form-select bg-dark text-white"
+                        onChange={(e) => setCategoryId(e.target.value)}
+                    >
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <button
+                    className="btn btn-primary w-100"
+                    onClick={createExpense}
+                >
+                    Create
+                </button>
+            </div>
         </div>
     );
 }

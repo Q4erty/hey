@@ -39,13 +39,13 @@ export default function DeleteUser() {
     };
 
     return (
-        <div>
-            <h2>Categories List</h2>
-            <ul>
+        <div className="card p-2 mt-5">
+            <h2 className="card-title text-center text-white">Categories List</h2>
+            <ul className="list-group list-group-flush">
                 {category.map((category) => (
-                    <li key={category.id}>
-                        {category.name} {" "}
-                        <button onClick={() => handleDelete(category.id)}>
+                    <li key={category.id} className="list-group-item d-flex justify-content-between align-items-center">
+                        {category.name}
+                        <button className="btn btn-danger" onClick={() => handleDelete(category.id)}>
                             Delete
                         </button>
                     </li>

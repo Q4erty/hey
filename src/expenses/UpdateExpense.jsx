@@ -46,16 +46,19 @@ export default function CreateExpenses() {
     };
 
     return (
-        <div>
-            <h1>Expenses</h1>
-            <select onChange={(e) => setSelectedCategory(e.target.value)}>
-                <option value="">All Categories</option>
-                {categories.map((category) => (
-                    <option key={category.id} value={category.id}>{category.name}</option>
-                ))}
-            </select>
-            <button onClick={() => setSelectedCategory("")}>Show All</button>
-            <ul>
+        <div className="container p-4 rounded mt-5">        
+            <h1 className="text-center mb-4">Expenses</h1>
+            <div className="mb-3">
+                <select 
+                    className="form-select bg-dark text-white" 
+                    onChange={(e) => setSelectedCategory(e.target.value)}>
+                    <option value="">All Categories</option>
+                    {categories.map((category) => (
+                        <option key={category.id} value={category.id}>{category.name}</option>
+                    ))}
+                </select>
+            </div>
+            <ul className="list-unstyled">
                 {expenses
                     .filter((expense) => {
                         if (selectedCategory === "") return true;
@@ -63,30 +66,45 @@ export default function CreateExpenses() {
                     })
                     .map((expense) => (
                         editData?.id !== expense.id ? (
-                            <li key={expense.id}>
+                            <li key={expense.id} className="mb-3 p-3 bg-dark rounded">
                                 <h3>{expense.amount}</h3>
                                 <p>{expense.comment}</p>
                                 <p>{expense.date}</p>
-                                <button onClick={() => setEditData(expense)}>Edit</button>
+                                <button 
+                                    className="btn btn-primary" 
+                                    onClick={() => setEditData(expense)}>
+                                    Edit
+                                </button>
                             </li>
                         ) : (
-                            <li key={expense.id}>
+                            <li key={expense.id} className="mb-3 p-3 bg-dark rounded">
                                 <input
                                     type="number"
+                                    className="form-control mb-3"
                                     value={editData.amount}
                                     onChange={(e) => setEditData({ ...editData, amount: e.target.value })}
-                                /><br/><br/>
+                                /><br/>
                                 <input
+                                    className="form-control mb-3"
                                     value={editData.comment}
                                     onChange={(e) => setEditData({ ...editData, comment: e.target.value })}
-                                /><br/><br/>
+                                /><br/>
                                 <input
                                     type="date"
+                                    className="form-control mb-3"
                                     value={editData.date}
                                     onChange={(e) => setEditData({ ...editData, date: e.target.value })}
-                                /><br/><br/>
-                                <button onClick={() => handleSave(expense.id)}>Save</button>
-                                <button onClick={() => setEditData(null)}>Cancel</button>
+                                /><br/>
+                                <button 
+                                    className="btn btn-success me-2" 
+                                    onClick={() => handleSave(expense.id)}>
+                                    Save
+                                </button>
+                                <button 
+                                    className="btn btn-danger" 
+                                    onClick={() => setEditData(null)}>
+                                    Cancel
+                                </button>
                             </li>
                         )
                     ))
@@ -94,4 +112,5 @@ export default function CreateExpenses() {
             </ul>
         </div>
     );
+
 }

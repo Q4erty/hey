@@ -22,10 +22,25 @@ export default function App() {
     }
 
     return (
-        <div>
-            <h1>Create Category</h1>
-            <input id="create-category" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} placeholder="Enter name of category" /><br/><br/>
-            <button onClick={handleCreateCategory}>Create</button>
+        <div className="d-flex justify-content-center align-items-center vh-100">
+            <div className="card p-4">
+                <h1 className="mb-4 text-white">Create Category</h1>
+                <div className="form-group">
+                    <input 
+                        className="form-control"
+                        id="create-category" 
+                        value={categoryName} 
+                        onChange={(e) => setCategoryName(e.target.value)} 
+                        placeholder="Enter name of category" 
+                    />
+                </div>
+                <button 
+                    className="btn btn-primary mt-3"
+                    onClick={handleCreateCategory}
+                >
+                    Create Category
+                </button>
+            </div>
         </div>
     );
 }

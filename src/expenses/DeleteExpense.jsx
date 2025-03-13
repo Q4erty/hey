@@ -43,31 +43,39 @@ export default function CreateExpenses() {
     };
 
     return (
-        <div>
-            <h1>Expenses</h1>
-            <select onChange={(e) => setSelectedCategory(e.target.value)}>
-                {categories.map((expense) => (
-                    <option key={expense.id} value={expense.id}>{expense.name}</option>
-                ))}
-            </select>
-            <button onClick={() => setSelectedCategory("")}>Show All</button>
-            <ul>
-                {expenses
-                    .filter((expense) => {
-                        if (selectedCategory === "") return true;
-                        return expense.categoryId === selectedCategory;
-                    })
-                    .map((expense) => (
-                        <li key={expense.id}>
-                            <h3>{expense.amount}</h3>
-                            <p>{expense.comment}</p>
-                            <p>{expense.date}</p>
-                            <button onClick={() => handleDelete(expense.id)}>
-                                Delete
-                            </button>
-                        </li>
-                ))}
-            </ul>
-        </div>
+            <div className="container p-4 rounded">
+                <h1 className="text-center mb-4 mt-5">Expenses</h1>
+                <div className="mb-3">
+                    <select 
+                        className="form-select bg-dark text-white" 
+                        onChange={(e) => setSelectedCategory(e.target.value)}>
+                        <option value="">All Categories</option>
+                        {categories.map((expense) => (
+                            <option key={expense.id} value={expense.id}>{expense.name}</option>
+                        ))}
+                    </select>
+                </div>
+                
+                <ul className="list-unstyled">
+                    {expenses
+                        .filter((expense) => {
+                            if (selectedCategory === "") return true;
+                            return expense.categoryId === selectedCategory;
+                        })
+                        .map((expense) => (
+                            <li key={expense.id} className="mb-3 p-3 bg-dark rounded">
+                                <h3 className="text-danger">{expense.amount}</h3>
+                                <p>{expense.comment}</p>
+                                <p className="text-secondary">{expense.date}</p>
+                                <button 
+                                    className="btn btn-danger" 
+                                    onClick={() => handleDelete(expense.id)}>
+                                    Delete
+                                </button>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
     );
 }
