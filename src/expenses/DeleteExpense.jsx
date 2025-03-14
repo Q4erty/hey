@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function CreateExpenses() {
+export default function DeleteExpense() {
     const [expenses, setExpenses] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');

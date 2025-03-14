@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function ShowUsers() {
+export default function ReadCategory() {
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [expenses, setExpenses] = useState([]);

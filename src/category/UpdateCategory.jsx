@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function App() {
+export default function UpdateCategory() {
     const [newName, setNewName] = useState('');
     const [index, setIndex] = useState('');
     const [categories, setCategories] = useState([]);

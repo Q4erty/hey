@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function DeleteUser() {
+export default function DeleteCategory() {
     const [category, setCategory] = useState([]);
 
     useEffect(() => {

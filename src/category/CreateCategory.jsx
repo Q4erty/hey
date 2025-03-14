@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 
-export default function App() {
-    const [categoryName, setCategoryName] = useState('');
+export default function CreateCategory() {
+    const [name, setName] = useState('');
 
     const handleCreateCategory = async () => {
         try {
             const response = await fetch(`http://localhost:3001/categories`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ categoryName })
+                body: JSON.stringify({ name })
             });
 
             if (response.ok) {
+                setName('');
                 alert('Category created successfully!');
             } else {
                 alert('Failed to create category');
@@ -29,8 +30,8 @@ export default function App() {
                     <input
                         className="form-control"
                         id="create-category"
-                        value={categoryName}
-                        onChange={(e) => setCategoryName(e.target.value)}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         placeholder="Enter name of category"
                     />
                 </div>
