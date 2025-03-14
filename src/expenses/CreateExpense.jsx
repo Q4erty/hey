@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export default function CreateExpenses() {
     const [categories, setCategories] = useState([]);
-    const [categoryId, setCategoryId] = useState("");
+    const [categoryId, setCategoryId] = useState('');
     const [expenseAmount, setExpenseAmount] = useState(0);
-    const [expenseDate, setExpenseDate] = useState("");
-    const [expenseDesription, setExpenseDescription] = useState("");
+    const [expenseDate, setExpenseDate] = useState('');
+    const [expenseDesription, setExpenseDescription] = useState('');
 
     useEffect(() => {
-        fetch("http://localhost:3001/categories")
+        fetch('http://localhost:3001/categories')
             .then((response) => {
                 return response.json();
             })
@@ -20,23 +20,23 @@ export default function CreateExpenses() {
     const createExpense = async () => {
         try {
             const response = await fetch(`http://localhost:3001/expenses`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     categoryId: categoryId,
                     amount: expenseAmount,
                     date: expenseDate,
-                    comment: expenseDesription,
-                }),
+                    comment: expenseDesription
+                })
             });
 
             if (response.ok) {
-                alert("Expense created successfully!");
+                alert('Expense created successfully!');
             } else {
-                alert("Failed to create expense");
+                alert('Failed to create expense');
             }
         } catch (error) {
-            console.error("Error creating expense:", error);
+            console.error('Error creating expense:', error);
         }
     };
 
@@ -75,10 +75,7 @@ export default function CreateExpenses() {
                     />
                 </div>
                 <div className="mb-3">
-                    <select
-                        className="form-select bg-dark text-white"
-                        onChange={(e) => setCategoryId(e.target.value)}
-                    >
+                    <select className="form-select bg-dark text-white" onChange={(e) => setCategoryId(e.target.value)}>
                         {categories.map((category) => (
                             <option key={category.id} value={category.id}>
                                 {category.name}
@@ -86,10 +83,7 @@ export default function CreateExpenses() {
                         ))}
                     </select>
                 </div>
-                <button
-                    className="btn btn-primary w-100"
-                    onClick={createExpense}
-                >
+                <button className="btn btn-primary w-100" onClick={createExpense}>
                     Create
                 </button>
             </div>
